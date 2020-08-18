@@ -216,13 +216,13 @@ function getRectangleString(width, height) {
     let string = "";
 
     for (let i = 1; i <= height; i++) {
-        if (i == 1) {
+        if (i === 1) {
             string = string + "┌" + "─".repeat(width - 2) + "┐\n";
         }
         if (i > 1 && i < height) {
             string = string + "│" + " ".repeat(width - 2) + "│\n";
         }
-        if (i == height) {
+        if (i === height) {
             string = string + "└" + "─".repeat(width - 2) + "┘\n"
         }
     }
@@ -274,9 +274,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    if (value) {
-        return typeof value.valueOf() === typeof String.name
-    } else return false;
+    return typeof value === 'string' || value instanceof String;
 }
 
 

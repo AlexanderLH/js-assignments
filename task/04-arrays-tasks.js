@@ -436,7 +436,7 @@ function toStringList(arr) {
 function sortCitiesArray(arr) {
    return arr.sort((a, b) => (a.country > b.country) ? 1 :
       (a.country < b.country) ? -1 :
-         (a.country == b.country) ? (a.city > b.city) ? 1 :
+         (a.country === b.country) ? (a.city > b.city) ? 1 :
             (a.city < b.city) ? -1 : 0 : 0
    );
    // arr.sort((a, b) => {
@@ -496,18 +496,17 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   const arr = Array(end - start + 1);
+   let arr = Array(end - start + 1);
 
    arr.fill(start);
-
    return arr.map((elem, index) => {
-      if (index == 0) {
+      if (index === 0) {
          return elem;
       }
-      else {
+      else if (index !== 0) {
          return elem += index;
       }
-   })
+   });
 }
 
 /**
@@ -605,7 +604,6 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2]) 
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-
 function getElementByIndexes(arr, indexes) {
    const summedIndex = indexes.reduce((result, el) => result + el, 0);
    return flattenDeep(arr)[summedIndex];

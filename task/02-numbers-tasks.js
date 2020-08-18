@@ -89,7 +89,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    return -b / a
+    return (b === 0) ? 0 : -b / a;
 }
 
 
@@ -191,7 +191,8 @@ function roundToPowerOfTen(num, pow) {
     if (pow > 0) {
         let newNum = '1' + '0'.repeat(pow);
         return Math.round(num / newNum) * newNum;
-    } else return num;
+    }
+    return num;
 }
 
 /**
@@ -215,7 +216,7 @@ function isPrime(n) {
     let result = true;
 
     for (let i = n - 1; i > 1; i--) {
-        if (n % i == 0) {
+        if (n % i === 0) {
             result = false;
             break;
         }
@@ -239,7 +240,8 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    return (isFinite(value) && (value !== null)) ? value.valueOf() : def;
+    return parseInt(value, 10) || def;
+    //return (isFinite(value) && (value !== null)) ? value.valueOf() : def;
 }
 
 module.exports = {
