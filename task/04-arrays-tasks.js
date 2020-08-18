@@ -605,6 +605,7 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2]) 
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
+
 function getElementByIndexes(arr, indexes) {
    const summedIndex = indexes.reduce((result, el) => result + el, 0);
    return flattenDeep(arr)[summedIndex];
