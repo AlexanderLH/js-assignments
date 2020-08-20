@@ -73,10 +73,9 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-   const regexpr = /^[0-9]|/
+   const regexpr = /^(([01]|[0-9][0-9]|[01][0-9][0-9]|[2][0-5][0-5])\.){3}([01]|[0-9][0-9]|[01][0-9][0-9]|[2][0-5][0-5])$/
    return regexpr;
 }
-
 
 /**
  * Returns the regexp that matches all SSN (Social Security Number) codes in
@@ -93,7 +92,8 @@ function getRegexForIPv4() {
  * @return {RegExp}
  */
 function getRegexForSSN() {
-   throw new Error('Not implemented');
+   const regexpr = /(?!000)\d{3}-(?!00)\d{2}-(?!0000)\d{4}$/;
+   return regexpr;
 }
 
 
