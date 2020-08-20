@@ -31,9 +31,9 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
+   const regexpr =  /^{[0-9]{1}[a-fA-F0-9]{7}-[a-fA-F0-9]{4}-4{1}[a-fA-F0-9]{3}-[89AB]{1}[a-fA-F0-9]{3}-[a-fA-F0-9]{12}}$/;
+   return string.match(regexpr);
 }
-
 
 /**
  * Returns the regexp that matches all the strings from first column
@@ -53,7 +53,8 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+   const regexpr = /.*p.t.*/
+   return string.match(regexpr);
 }
 
 
