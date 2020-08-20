@@ -32,7 +32,7 @@
  */
 function getRegexForGuid() {
    const regexpr =  /^{[0-9]{1}[a-fA-F0-9]{7}-[a-fA-F0-9]{4}-4{1}[a-fA-F0-9]{3}-[89AB]{1}[a-fA-F0-9]{3}-[a-fA-F0-9]{12}}$/;
-   return string.match(regexpr);
+   return regexpr;
 }
 
 /**
@@ -54,7 +54,7 @@ function getRegexForGuid() {
  */
 function getRegexForPitSpot() {
    const regexpr = /.*p.t.*/
-   return string.match(regexpr);
+   return regexpr;
 }
 
 
@@ -73,7 +73,8 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-   throw new Error('Not implemented');
+   const regexpr = /^[0-9]|/
+   return regexpr;
 }
 
 
