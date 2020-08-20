@@ -357,7 +357,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   return (arr.length) ? arr.reduce((sum, currentItem) => sum += currentItem) : 0;
+   return arr.reduce((sum, currentItem) => sum += currentItem, 0);
 }
 
 /** 
@@ -373,7 +373,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   return (arr.length) ? arr.reduce((sum, currentItem) => (currentItem) ? sum += 0 : sum += 1, 0) : 0;
+   return arr.filter(value => !value).length;
 }
 /**
  * Returns a number of all occurences of the specified item in an array  
@@ -390,7 +390,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   return arr.reduce((counter, currentItem) => (currentItem === item) ? counter += 1 : counter, 0);
+   return arr.filter(value => value === item).length;
 }
 
 /**
@@ -434,20 +434,21 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   return arr.sort((a, b) => (a.country > b.country) ? 1 :
-      (a.country < b.country) ? -1 :
-         (a.country === b.country) ? (a.city > b.city) ? 1 :
-            (a.city < b.city) ? -1 : 0 : 0
-   );
-   // arr.sort((a, b) => {
-   //    if(a.country < b.country) { return -1; }
-   //    if(a.country > b.country) { return 1; }
-   // });
-   // return arr.sort((a, b) => {
-   //    if (a.country === b.country)
-   //    if(a.city < b.city) { return -1; }
-   //    if(a.city > b.city) { return 1; }
-   // });
+   return arr.sort((a, b) => {
+      if (a.country > b.country) {
+         return 1;
+      } else if (a.country < b.country) {
+         return -1;
+      } else if (a.country === b.country) {
+         if (a.city > b.city) {
+            return 1;
+         } else if (a.city < b.city) {
+            return -1;
+         }
+         return 0
+      }
+      return 0;
+   });
 }
 
 /**

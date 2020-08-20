@@ -91,11 +91,14 @@ function timeSpanToString(startDate, endDate) {
    const seconds = Math.floor(milliseconds / (1000));
    milliseconds -= seconds * (1000);
    const formatToDoubleDigit = (number) => number < 10 ? `0${number}` : `${number}`;
-   const formatToThreeDigit = (number) => number < 10
-      ? `00${number}`
-      : number > 10 && number < 100
-         ? `0${number}`
-         : number;
+   const formatToThreeDigit = (number) => {
+      if (number < 10) {
+         return `00${number}`;
+      } else if (number > 10 && number < 100) {
+         return `0${number}`;
+      }
+      return number;
+   }
    hours = days * 24 + hours;
    const result = `${formatToDoubleDigit(hours)}:${formatToDoubleDigit(mins)}:${formatToDoubleDigit(seconds)}.${formatToThreeDigit(milliseconds)}`
    return result;
