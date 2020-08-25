@@ -431,7 +431,32 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    const differenceInTime = endDate.getTime() - startDate.getTime();
+    const timeInSeconds = differenceInTime / 1000;
+    const timeInMinutes = differenceInTime / 1000 / 60;
+    const timeInHours = differenceInTime / 1000 / 60 / 60;
+    const timeInDays = differenceInTime / 1000 / 60 / 60 / 24;
+
+    const mathRoundOrFloor = (value) => {
+        if (value - Math.floor(value) > 0.5) {
+            return Math.round(value);
+        }
+        return Math.floor(value);
+    }
+
+    switch (true) {
+        case timeInSeconds >= 0 && timeInSeconds <= 45: return `a few seconds ago`;
+        case timeInSeconds > 45 && timeInSeconds <= 90: return `a minute ago`;
+        case timeInSeconds >= 90 && timeInMinutes <= 45: return `${mathRoundOrFloor(timeInMinutes)} minutes ago`;
+        case timeInMinutes >= 45 && timeInMinutes <= 90: return `an hour ago`;
+        case timeInMinutes >= 90 && timeInHours <= 22: return `${mathRoundOrFloor(timeInHours)} hours ago`;
+        case timeInHours >= 22 && timeInHours <= 36: return `a day ago`;
+        case timeInHours >= 36 && timeInDays <= 25: return `${mathRoundOrFloor(timeInDays)} days ago`;
+        case timeInDays >= 25 && timeInDays <= 45: return `a month ago`;
+        case timeInDays >= 45 && timeInDays <= 345: return `${mathRoundOrFloor(timeInDays / 30)} months ago`;
+        case timeInDays >= 345 && timeInDays <= 545: return `a year ago`;
+        case timeInDays > 546: return `${mathRoundOrFloor(timeInDays / 365)} years ago`;
+    }
 }
 
 
