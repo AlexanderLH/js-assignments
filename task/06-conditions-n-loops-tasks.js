@@ -100,7 +100,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a, b, c) {
-    return ((a + b > c) && (b + c > a) && (a + c > b)) ? true : false;
+    return (a + b > c) && (b + c > a) && (a + c > b);
 }
 
 
@@ -137,11 +137,10 @@ function isTriangle(a, b, c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    if ((rect1.width > rect2.top) || (rect1.height > rect2.left)) {
-        return true;
+    if ((rect1.top > rect2.top + rect2.width) || (rect1.top + rect1.width < rect2.top) || (rect1.left > rect2.left + rect2.height) || (rect1.height + rect1.left < rect2.left)) {
+        return false;
     }
-
-    return false;
+    return true;
 }
 
 
@@ -172,11 +171,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    if (Math.sqrt((circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2) - circle.radius < 0) {
-        return true;
-    }
-
-    return false;
+    return Math.hypot((circle.center.x - point.x), (circle.center.y - point.y)) - circle.radius < 0;
 }
 
 
@@ -358,7 +353,8 @@ function getDigitalRoot(num) {
 
     if (sum < 9) {
         return sum;
-    } else return getDigitalRoot(sum);
+    }
+    return getDigitalRoot(sum);
 }
 
 
@@ -460,11 +456,13 @@ function timespanToHumanString(startDate, endDate) {
  */
 function toNaryString(num, n) {
     let arr = [];
+
     do {
         arr.push(num % n);
         num = Math.floor((num - (num % n)) / n);
     } while (num >= n);
     arr.push(num % n);
+
     return arr.reverse().join('');
 }
 
@@ -520,17 +518,22 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    let m3 = [];
+    const m1NumOfRows = m1.length;
+    const m1NumOfColumns = m1[0].length;
+    const m2NumOfRows = m2.length;
+    const m2NumOfColumns = m2[0].length;
+    const m3 = [];
 
-    for (let i = 0; i < m1.length; i++) m3[i] = [];
+    for (let row = 0; row < m1NumOfRows; row++) m3[row] = [];
 
-    for (let k = 0; k < m2[0].length; k++) {
-        for (let i = 0; i < m1.length; i++) {
+    for (let column = 0; column < m2NumOfColumns; column++) {
+        for (let i = 0; i < m1NumOfRows; i++) {
             let temp = 0;
-            for (let j = 0; j < m2.length; j++) temp += m1[i][j] * m2[j][k];
-            m3[i][k] = temp;
+            for (let j = 0; j < m2NumOfRows; j++) temp += m1[i][j] * m2[j][column];
+            m3[i][column] = temp;
         }
     }
+
     return m3;
 }
 
